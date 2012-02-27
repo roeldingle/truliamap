@@ -1,0 +1,57 @@
+@CHARSET "ISO-8859-1";
+
+a{text-decoration:none !important;}
+a:hover{text-decoration:underline !important;}
+
+.display_position input[type="radio"] {margin-right:5px;vertical-align:top}
+
+.display_position .left {float:left;margin-right:20px}
+.display_position .right {float:left}
+
+		.div_container {position:relative;display:inline-block}
+		.rotate_div{position:absolute;width:250px;height:300px;border:1px solid black;margin:100px 100px 100px  100px;}
+		
+		<!--slideshow-->
+		#tSlideShow{ position:relative; width:450px;margin:0 50px 0 50px; } 
+		#tSlideShow .tSlideShowFL a, #tSlideShow .tSlideShowFR a{ color:#06C; text-decoration:none; font-family: Verdana, Arial, Helvetica, sans-serif; font-size:10px;  }  
+		#tSlideShow .tSlideShowFL a:hover, #tSlideShow .tSlideShowFR a:hover{color:#DF7E00 !important;text-decoration:underline !important;}
+		
+		<!--carousel-->
+		#tCarousel{ position:relative; width:300px; }
+		#tCarousel .tCarouselFL a{ color:#06C; text-decoration:none; font-family: Verdana, Arial, Helvetica, sans-serif; font-size:10px;text-decoration:none;  }
+		#tCarousel .tCarouselFL a:hover, #tCarousel .tCarouselFR a:hover {color:#DF7E00 !important;text-decoration:underline !important;}
+		#tCarousel .tCarouselFR a {color:#393939;font-family: Verdana, Arial, Helvetica, sans-serif; font-size:10px;text-decoration:none;}
+	
+		
+		
+
+
+.module_title {text-decoration:none;background: url("../img/right_scroll.gif") no-repeat center right; padding-right:5px;cursor:pointer;}
+.symb_style {font-size:12px;font-weight:bold;font-style:normal;text-decoration:none;color:#000000;}
+
+.tbl_option {margin-top:5px;margin-left:115px}
+
+/* float */
+.fl {float:left !important}
+.fr {float:rigth !important}
+
+/* margin */
+
+.sml {margin-left:5px !important}
+.smt {margin-top:2px !important}
+
+.width_1 {width:55px}
+
+.tbl_option td {padding-bottom:3px}
+
+.radio_btn_search {float:left !important;width:auto !important;margin:0 !important}
+.radio_btn_label {float:left !important;margin:0 0 0 5px!important}
+
+input.btn_apply {width:103px;height:25px !important;border:none;display:inline-block;text-align:center;padding:4px 0 5px 0;background:#000 url(/_sdk/img/googlemapmarker/bg_btn_input.gif) repeat-x;font-weight:bold;font-size:13px;color:#fff;text-decoration:none !important;vertical-align:middle}
+.custom_image {width:25px;height:25px;display:inline-block}
+
+body .search_state_container {height:200px;overflow:auto;background-color:#fff}
+body .search_states {padding:5px;}
+body .search_states li {width:100%;margin:0 0 5px 0;line-height:10px;display:inline-block}
+body .search_states input {float:left;margin:0 20px 0 10px;width:auto}
+body .search_states li label {float:left;margin-top:3px;vertical-align:middle !important}
