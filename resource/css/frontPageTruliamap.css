@@ -1,0 +1,17 @@
+@CHARSET "ISO-8859-1";
+
+.div_container {position:relative;display:inline-block}
+		.rotate_div{position:absolute;width:250px;height:300px;border:1px solid black;margin:100px 100px 100px  100px;}
+		
+		<!--slideshow-->
+		#tSlideShow{ position:relative; width:450px; } 
+		#tSlideShow .tSlideShowFL a, #tSlideShow .tSlideShowFR a{ color:#06C; text-decoration:none; font-family: Verdana, Arial, Helvetica, sans-serif; font-size:10px;  }  
+		#tSlideShow .tSlideShowFL a:hover, #tSlideShow .tSlideShowFR a:hover{color:#DF7E00 !important;text-decoration:underline !important;}
+		
+		<!--carousel-->
+		#tCarousel{ position:relative; width:300px; }
+		#tCarousel .tCarouselFL a{ color:#06C; text-decoration:none; font-family: Verdana, Arial, Helvetica, sans-serif; font-size:10px;text-decoration:none;  }
+		#tCarousel .tCarouselFL a:hover, #tCarousel .tCarouselFR a:hover {color:#DF7E00 !important;text-decoration:underline !important;}
+		#tCarousel .tCarouselFR a {color:#393939;font-family: Verdana, Arial, Helvetica, sans-serif; font-size:10px;text-decoration:none;}
+		
+.truliamap_frame{width:100%;border:none;scrolling:none;height:420px;}

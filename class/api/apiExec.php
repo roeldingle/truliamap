@@ -15,14 +15,14 @@ class apiExec extends Controller_Api
         $oExec = new modelExec;
         $oGet = new modelGet;
      
-	#data to insert
+	#data to insert get_slideshow_opt: slideshow_opt
 	$aData = array(
 		'idx' => '',
 		'seq' => $iSeq,
 		'map_type' => $aArgs['get_map_type'],
     	'state' => $aArgs['get_state'],
     	'city' => json_encode($aArgs['get_city']),
-    	'display_type' => $aArgs['get_display']
+    	'slideshow_option' => json_encode($aArgs['get_slideshow_opt'])
 
 	
 		);

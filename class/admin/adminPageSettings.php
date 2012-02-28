@@ -26,10 +26,9 @@ class adminPageSettings extends Controller_Admin
     	$sGooglemaps_url = 'https://maps.googleapis.com/maps/api/js?v=3&sensor=true';
     	$this->externalJS($sGooglemaps_url);
     	
-    	
-    	$this->importJS(__CLASS__);
-    	
     	$this->importJS("Googlemaps");
+    	$this->importJS("devTools");
+    	$this->importJS(__CLASS__);
     	$this->importCSS(__CLASS__);
     	
     	/*save form validator*/
@@ -49,19 +48,26 @@ class adminPageSettings extends Controller_Admin
     				'map_type' => "Normal",
     				'state' => 'CA',
     				'city' => '[{"loc":"Los Angeles,CA","lat":"34.0522342","lng":"-118.2436849"}]',
-    				'display_type' => 0
-    						);
+    				'slideshow_option' => '{"price":"0+0","bed":"0","bath":"0"}'
+    			);
     	
     	}
 
-    	
     	$aCity = json_decode($aUserSetting['city'],true);
+    	$aSlideshow_opt = json_decode($aUserSetting['slideshow_option'],true);
+    	
+    	$aPrice = explode("+",$aSlideshow_opt['price']);
+    	
+    	$iLen = (count($aCity)-1);
+    	$this->assign('iLat', $aCity[$iLen][lat]);
+    	$this->assign('iLng', $aCity[$iLen][lng]);
     	
     	$this->assign("aUserSetting",$aUserSetting);
     	$this->assign("aCity",$aCity);
     	$this->assign("aStates",$this->getStates());
+    	$this->assign("aSlideshow_opt",$aSlideshow_opt);
+    	$this->assign("aPrice",$aPrice);
     	
-
     	/*set the template*/
     	$this->view(__CLASS__);
 

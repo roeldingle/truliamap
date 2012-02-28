@@ -3,8 +3,8 @@
  */
 var Googlemap = {
 		
-		/*global variables*/
-		map : null,
+	/*global variables*/
+	map : null,
 		
 	
 	/*
@@ -16,13 +16,13 @@ var Googlemap = {
 	},
 	
 	
-	marker_init: function(locations,lat,lng){
+	marker_init: function(locations,lat,lng, bFunc){
+		
+		
 		
 		/*image*/
-		var image_icon = '/_sdk/img/truliamap/icon_marker_00.png';
+		var image_icon = '/_sdk/img/truliamap/truliamap_icon.png';
 	
-		
-		
 		Googlemap.markers = new google.maps.Marker({
 			  position: new google.maps.LatLng(lat,lng),
 			  map: Googlemap.map,
@@ -32,18 +32,13 @@ var Googlemap = {
 			  icon: image_icon
 			});
 		
-		/*Show infowindow on mouseove*/
-		  google.maps.event.addListener(Googlemap.markers, 'click', function() {
-			    adminPageSettings.show(locations);
-		 });
-		
-		
-		
-		
-		
-	},
-	validURL: function(str) {
-		var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
-		return regexp.test(str);
+		if(bFunc == 1){
+			/*Show infowindow on mouseove*/
+			  google.maps.event.addListener(Googlemap.markers, 'click', function(){
+				  frontPageTruliamap.show(locations);
+				  	
+			 });
+		}	
 	}
 };
+
