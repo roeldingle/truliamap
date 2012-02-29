@@ -49,11 +49,13 @@ var frontPageTruliamap = {
 				break;
 			}
 			
+			var zoom = $("."+devTools.APP_NAME+"_zoom").val();
+			
 			/*setmap options*/
 			 var myOptions = {
 				disableDefaultUI: true,
 				panControl: false,
-			    zoom: 1,
+			    zoom: parseInt(zoom),
 			    center: new google.maps.LatLng(iLat ,iLng),
 			    mapTypeId: maptype,
 			    scaleControl: true,
@@ -153,7 +155,7 @@ var frontPageTruliamap = {
 			if(price_from == "0" || parseInt(price_to) > parseInt(price_from))
 				price_from = price_to;
 			
-			
+			if(price_to != "0" && price_from != "0")
 			url += '/'+price_to+'-'+price_from+'_price';
 			
 			if(bed != "0")
@@ -166,7 +168,6 @@ var frontPageTruliamap = {
 			url += '&tpl_width=450';
 			url += '&refresh_speed=5';
 
-			
 		$("."+devTools.APP_NAME+"_design_container").empty().append("<iframe class='"+devTools.APP_NAME+"_frame' src='"+url+"'  ></iframe>");
 		
 	
@@ -175,7 +176,6 @@ var frontPageTruliamap = {
 };
 
 
-$(document).ready(function(){
+$(function(){
 	frontPageTruliamap.initialize();
-
 });

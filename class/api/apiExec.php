@@ -20,6 +20,7 @@ class apiExec extends Controller_Api
 		'idx' => '',
 		'seq' => $iSeq,
 		'map_type' => $aArgs['get_map_type'],
+		'zoom' => $aArgs['get_zoom'],
     	'state' => $aArgs['get_state'],
     	'city' => json_encode($aArgs['get_city']),
     	'slideshow_option' => json_encode($aArgs['get_slideshow_opt'])

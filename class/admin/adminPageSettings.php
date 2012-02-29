@@ -46,6 +46,7 @@ class adminPageSettings extends Controller_Admin
     	if(empty($aUserSetting) || isset($aArgs['truliamap_reset'])){
     		$aUserSetting = array(
     				'map_type' => "Normal",
+    				'zoom' => 1,
     				'state' => 'CA',
     				'city' => '[{"loc":"Los Angeles,CA","lat":"34.0522342","lng":"-118.2436849"}]',
     				'slideshow_option' => '{"price":"0+0","bed":"0","bath":"0"}'
@@ -64,7 +65,7 @@ class adminPageSettings extends Controller_Admin
     	
     	$this->assign("aUserSetting",$aUserSetting);
     	$this->assign("aCity",$aCity);
-    	$this->assign("aStates",$this->getStates());
+    	$this->assign("aStates",common()->getStates());
     	$this->assign("aSlideshow_opt",$aSlideshow_opt);
     	$this->assign("aPrice",$aPrice);
     	
@@ -91,6 +92,65 @@ class adminPageSettings extends Controller_Admin
     	return  $aDataContent['response']['LocationInfo']['state'];
     	
     	
+    }
+    
+    public function getState(){
+    	
+    	$sStates = '
+    	[{"name":"Alabama","stateCode":"AL"},
+    	{"name":"Alaska","stateCode":"AK"},
+    	{"name":"Arizona","stateCode":"AZ"},
+    	{"name":"Arkansas","stateCode":"AR"},
+    	{"name":"California","stateCode":"CA"},
+    	{"name":"Colorado","stateCode":"CO"},
+    	{"name":"Connecticut","stateCode":"CT"},
+    	{"name":"Delaware","stateCode":"DE"},
+    	{"name":"District Of Columbia","stateCode":"DC"},
+    	{"name":"Florida","stateCode":"FL"},
+    	{"name":"Georgia","stateCode":"GA"},
+    	{"name":"Hawaii","stateCode":"HI"},
+    	{"name":"Idaho","stateCode":"ID"},
+    	{"name":"Illinois","stateCode":"IL"},
+    	{"name":"Indiana","stateCode":"IN"},
+    	{"name":"Iowa","stateCode":"IA"},
+    	{"name":"Kansas","stateCode":"KS"},
+    	{"name":"Kentucky","stateCode":"KY"},
+    	{"name":"Louisiana","stateCode":"LA"},
+    	{"name":"Maine","stateCode":"ME"},
+    	{"name":"Maryland","stateCode":"MD"},
+    	{"name":"Massachusetts","stateCode":"MA"},
+    	{"name":"Michigan","stateCode":"MI"},
+    	{"name":"Minnesota","stateCode":"MN"},
+    	{"name":"Mississippi","stateCode":"MS"},
+    	{"name":"Missouri","stateCode":"MO"},
+    	{"name":"Montana","stateCode":"MT"},
+    	{"name":"Nebraska","stateCode":"NE"},
+    	{"name":"Nevada","stateCode":"NV"},
+    	{"name":"New Hampshire","stateCode":"NH"},
+    	{"name":"New Jersey","stateCode":"NJ"},
+    	{"name":"New Mexico","stateCode":"NM"},
+    	{"name":"New York","stateCode":"NY"},
+    	{"name":"North Carolina","stateCode":"NC"},
+    	{"name":"North Dakota","stateCode":"ND"},
+    	{"name":"Ohio","stateCode":"OH"},
+    	{"name":"Oklahoma","stateCode":"OK"},
+    	{"name":"Oregon","stateCode":"OR"},
+    	{"name":"Pennsylvania","stateCode":"PA"},
+    	{"name":"Rhode Island","stateCode":"RI"},
+    	{"name":"South Carolina","stateCode":"SC"},
+    	{"name":"South Dakota","stateCode":"SD"},
+    	{"name":"Tennessee","stateCode":"TN"},
+    	{"name":"Texas","stateCode":"TX"},
+    	{"name":"Utah","stateCode":"UT"},
+    	{"name":"Vermont","stateCode":"VT"},
+    	{"name":"Virginia","stateCode":"VA"},
+    	{"name":"Washington","stateCode":"WA"},
+    	{"name":"West Virginia","stateCode":"WV"},
+    	{"name":"Wisconsin","stateCode":"WI"},
+    	{"name":"Wyoming","stateCode":"WY"}]';
+    	
+    	$aReturn = json_decode($sStates,true);
+    	return $aReturn;
     }
     
     public function downloadXmlFile($path)

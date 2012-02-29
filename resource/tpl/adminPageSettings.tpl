@@ -10,6 +10,7 @@
 <input type="hidden"  id="<?php echo $APP_NAME;?>_lat" value="<?php echo $iLat;?>" />
 <input type="hidden" id="<?php echo $APP_NAME;?>_lng" value="<?php echo $iLng;?>" />
 
+
 		
 <form name="<?php echo $APP_NAME;?>_form" id="googlemapmark_form"  method="POST">
 	<div id="<?php echo $APP_NAME;?>_wrap">
@@ -20,14 +21,14 @@
 	
 	<table border="1" cellspacing="0" class="table_input_vr">
 	<colgroup>
-		<col width="115px" />
+		<col width="110px" />
 		<col width="*" />
 	</colgroup>
 	
 	<!-- map type -->
 	<tr>
 		<th><label>Map Type</label></th>
-		<td>
+		<td class="tulia_select">
 			<select id="<?php echo $APP_NAME;?>_maptype"  name="<?php echo $APP_NAME;?>_maptype"  >
 				<option <?php echo ($aUserSetting['map_type'] == "Normal") ? "selected" : "" ;?> >Normal</option>
 				<option <?php echo ($aUserSetting['map_type'] == "Satellite") ? "selected" : "" ;?> >Satellite</option>
@@ -37,10 +38,23 @@
 		</td>
 	</tr>
 	
+	<!-- zoom -->
+	<tr>
+		<th><label>Zoom</label></th>
+		<td class="tulia_select">
+			<select id="<?php echo $APP_NAME;?>_zoom"  name="<?php echo $APP_NAME;?>_zoom"  >
+			
+				<?php for($x=1;$x<=15;$x++){?>
+				<option value="<?php echo $x;?>" <?php echo ($aUserSetting['zoom'] == $x) ? "selected" : "" ;?> ><?php echo $x;?></option>
+				<?php }?>
+			</select>
+		</td>
+	</tr>
+	
 	<!-- state -->
 	<tr>
 		<th><label>State</label></th>
-		<td>
+		<td class="tulia_select">
 			<select id="<?php echo $APP_NAME;?>_states"  name="<?php echo $APP_NAME;?>_states"  >
 				<?php 
 					foreach($aStates as $key=>$val){
@@ -65,7 +79,8 @@
 				
 				<!-- loop the array containing the marker data -->
 				<?php  $counter = 0; foreach($aCity as $val){ ?>
-					<div class="add_location" id="<?php echo $APP_NAME;?>_marker_con_<?php echo $counter;?>" style="width:700px;height:40px;" >
+					<div class="add_location" id="<?php echo $APP_NAME;?>_marker_con_<?php echo $counter;?>" style="width:700px;height:30px;" >
+						<img src="/_sdk/img/truliamap/truliamap_icon_small.png" class="truliamap_icon_marker" />
 						<input type="text"  value="<?php echo $val['loc'];?>(<?php echo $val['lat'];?>,<?php echo $val['lng'];?>)" readonly name="<?php echo $APP_NAME;?>_marker[]"  class="textbox" value="" style="float:left;width:350px;margin-top:3px" />
 						<a  href="javascript:adminPageSettings.remove_marker(<?php echo $counter;?>);"  ><img src="/_sdk/img/<?php echo $APP_NAME;?>/close_btn.png" class="close_btn" style="float:left;margin-top:4px;margin-left:5px;vertical-align:middle;display:inline-block" /></a>	
 					</div>
@@ -76,19 +91,12 @@
 	</tr>	
 	
 	<!-- map type -->
-	<tr>
+	<tr class="tulia_slideshow_options">
 		<th><label>Slideshow options</label></th>
 		<td>
-		<!-- 
-		<span class="display_position" >
-			<p class="left"><input type="radio" name="<?php echo $APP_NAME;?>_display_type" value="0" <?php if($aUserSetting['display_type'] == 0){ echo "checked";} ?> />Slideshow</p>
-			<p class="right"><input type="radio" name="<?php echo $APP_NAME;?>_display_type" value="1" <?php if($aUserSetting['display_type'] == 1){ echo "checked";} ?> />Carousel</p>
-		</span>
 		
-		 -->
 		<br />
-		
-		<table>
+		<table class="slideshow_options">
 			<tr>
 				<td>Price : </td>
 				<!--  -->

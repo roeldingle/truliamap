@@ -4,6 +4,22 @@ var devTools ={
 	/*set global variables*/
 	APP_NAME: $("#APP_NAME").val(),
 	
+	/*ajax submit*/
+	ajax_submit: function(apiUrl,aData,aSuccess){
+		
+		/*ajax submit*/
+		$.ajax({  
+			url: usbuilder.getUrl(apiUrl),
+			type: 'post',
+			dataType: 'json',
+			data:  aData,
+			success: function(data){
+				aSuccess.result(data.Data);
+			}
+		});
+		
+	},
+	
 	/*reset to default*/
 	reset_default: function(){
 		$("#"+devTools.APP_NAME+"_form_reset").submit();

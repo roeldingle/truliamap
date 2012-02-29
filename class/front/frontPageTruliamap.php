@@ -25,11 +25,8 @@ class frontPageTruliamap extends Controller_Front
     	$this->assign("APP_NAME",$APP_NAME);
     	$this->importJS("jquery-ui-1.8.16.custom.min");
     	$sGooglemaps_url = 'https://maps.googleapis.com/maps/api/js?v=3&sensor=true';
-    	
-    	
     	$this->externalJS($sGooglemaps_url);
-    	
-    	
+    
     	$this->importJS("Googlemaps");
     	$this->importJS("devTools");
     	
@@ -44,10 +41,11 @@ class frontPageTruliamap extends Controller_Front
     	if(empty($aUserSetting) || isset($aArgs['truliamap_reset'])){
     		$aUserSetting = array(
     				'map_type' => "Normal",
+    				'zoom' => 1,
     				'state' => 'CA',
     				'city' => '[{"loc":"Los Angeles,CA","lat":"34.0522342","lng":"-118.2436849"}]',
     				'slideshow_option' => '{"price":"0+0","bed":"0","bath":"0"}'
-    				);
+    			);
     	}
 
     	
@@ -62,11 +60,10 @@ class frontPageTruliamap extends Controller_Front
     	$sData = '';
     	
     	//map container
-    	$sData .= '<div id="'.$APP_NAME.'_wrap">';
-    	$sData .= '<div id="'.$APP_NAME.'_mapcontainer">';
+    	$sData .= '<div id="'.$APP_NAME.'_mapcontainer" style="width:100%;height:100%;">';
     	$sData .= '<div id="map_canvas"></div>';
     	$sData .= '</div>';
-    	$sData .= '</div>';
+    
     
     	//markers
     	$sData .= '<div id="'.$APP_NAME.'_location_wrap" >';
@@ -85,6 +82,7 @@ class frontPageTruliamap extends Controller_Front
     	$sData .= '<div class="'.$APP_NAME.'_hidden_values" style="display:none;" >';
     	$sData .= '<input type="hidden"  id="APP_NAME" value="'.$APP_NAME.'" />';
     	$sData .= '<input type="text" class="'.$APP_NAME.'_maptype" value="'.$aUserSetting['map_type'].'" />';
+    	$sData .= '<input type="text" class="'.$APP_NAME.'_zoom" value="'.$aUserSetting['zoom'].'" />';
     	$sData .= "<input type='text' class='".$APP_NAME."_state' value='".$aUserSetting['state']."' />";
     	$sData .= '<input type="text"  class="'.$APP_NAME.'_lat" value="'.$aCity[$iLen][lat].'" />';
     	$sData .= '<input type="text" class="'.$APP_NAME.'_lng" value="'.$aCity[$iLen][lng].'" />';
@@ -98,7 +96,7 @@ class frontPageTruliamap extends Controller_Front
     	/*slideshow/dialogbox container*/
     	$sData .= '<div class="'.$APP_NAME.'_design_container" style="display:none;" ></div>';
     	
-    	$this->assign("Truliamap",$sData);
+    	$this->assign(ucwords($APP_NAME),$sData);
     
     }
 }
