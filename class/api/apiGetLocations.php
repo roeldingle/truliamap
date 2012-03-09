@@ -9,21 +9,24 @@ class apiGetLocations extends Controller_Api
         require_once('builder/builderInterface.php');
          usbuilder()->init($this, $aArgs);
         
-      //  $sSearch = str_replace(" ","%20",$aArgs['get_search']);
-      $sState = $aArgs['get_state'];
+	      $sState = $aArgs['get_state'];
+	      $sSearch = $aArgs['get_search_key'];
         
         $sUrl = "http://api.trulia.com/webservices.php?library=LocationInfo&function=getCitiesInState&state=".$sState."&apikey=veedc6ryhzw9dqdnwqbvxap8";
        	
         $xmlFile = common()->downloadXmlFile($sUrl);
         
         $sDataFile = new SimpleXmlElement($xmlFile);
-        
+       
         $sData = json_encode($sDataFile);
         
         $aDataContent = json_decode($sData,true);
         
-        $aReturn = array_slice($aDataContent['response']['LocationInfo']['city'],0,10);
-		
+  
+        $aCity = common()->search_arr($aDataContent['response']['LocationInfo']['city'],$sSearch);
+        
+        $aReturn['data'] = (count($aCity) > 0)? $aCity: false;
+       
 		return  $aReturn;
         
     }

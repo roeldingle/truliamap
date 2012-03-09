@@ -88,4 +88,23 @@ class common
 		return $retValue;
 	}
 	
+	/*search the curl*/
+	function search_arr($aArrData,$sSearch){
+		
+		$pattern = '/^'.$sSearch.'/i';
+		$aReturn = array();
+		
+		foreach($aArrData as $key=>$val){
+			
+			if(preg_match($pattern, $val['name'], $matches, PREG_OFFSET_CAPTURE)){
+				array_push($aReturn,$val);
+			}
+			
+		}
+		
+		
+		return $aReturn;
+	
+	}
+	
 }
