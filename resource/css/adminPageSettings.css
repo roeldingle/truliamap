@@ -1,5 +1,10 @@
 @CHARSET "ISO-8859-1";
 
+
+#truliamap_popupbox_help p{margin:0 0 0 0;text-align:left;}
+
+#truliamap_popupbox_help ol{text-align:left;margin-left:20px;} 
+
 .hid_clas{display:none;}
 
 

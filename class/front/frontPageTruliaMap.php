@@ -1,16 +1,13 @@
 <?php
-class frontPageTruliamap extends Controller_Front
-{
+class frontPageTruliaMap extends Controller_Front{
 
 	protected $oGet;
 
-    protected function run($aArgs)
-    {
+    protected function run($aArgs){
 
-     require_once('builder/builderInterface.php');
+    require_once('builder/builderInterface.php');
     usbuilder()->init($this, $aArgs);
     
-
  	/*assign objects*/
     $this->oGet = new modelGet;
     
@@ -24,14 +21,7 @@ class frontPageTruliamap extends Controller_Front
     	$APP_NAME = "truliamap";
     	
     	$this->assign("APP_NAME",$APP_NAME);
-    	$this->importJS("jquery-ui-1.8.16.custom.min");
     	
-    
-    	//$this->importJS("Googlemaps");
-    	//$this->importJS("devTools");
-    	
-    	//$this->importJS(__CLASS__);
-    	$this->importCSS('ui-lightness/jquery-ui-1.8.16.custom');
     	$this->importCSS(__CLASS__);
     	
     	/*set the user setting*/
@@ -96,14 +86,14 @@ class frontPageTruliamap extends Controller_Front
 			    	$sData .= '<input type="hidden" class="'.$APP_NAME.'_speed" value="'.$aSlideshow_opt['speed'].'" />';
 			    	$sData .= '<input type="hidden" class="'.$APP_NAME.'_bed" value="'.$aSlideshow_opt['bed'].'" />';
 			    	$sData .= '<input type="hidden" class="'.$APP_NAME.'_bath" value="'.$aSlideshow_opt['bath'].'" />';
-			    	
-	    	
-			    	
+			    		
 	    	/*slideshow/dialogbox container*/
-	    	$sData .= '<div class="'.$APP_NAME.'_design_container"  ></div>';
-    	}
+	    	$sData .= '<div class="'.$APP_NAME.'_design_container" ></div>';
+    	}else{
+			$sData .= '<div class="'.$APP_NAME.'_err" ></div>';
+		}
     	
-    	$this->assign(ucwords($APP_NAME),$sData);
+    	$this->assign("display",$sData);
     	
     	$this->init_js($aArgs);
     
@@ -113,6 +103,7 @@ class frontPageTruliamap extends Controller_Front
     
     	$sJs = '
     	sdk_Module("'.usbuilder()->getModuleSelector().'").ready(function($M){
+    	
 		    var Googlemap = {
 		
 				/*global variables*/
@@ -120,15 +111,11 @@ class frontPageTruliamap extends Controller_Front
 				/*
 				 * create the map object and display in map_canvas
 				 */
-				map_init : function(myOptions)
-				{
+				map_init : function(myOptions){
 				 Googlemap.map = new google.maps.Map($M(".map_canvas").get(0), myOptions);	
 				},
 				
-				
 				marker_init: function(locations,lat,lng, bFunc){
-					
-					
 					
 					/*image*/
 					var image_icon = "/_sdk/img/truliamap/truliamap_icon.png";
@@ -144,13 +131,17 @@ class frontPageTruliamap extends Controller_Front
 					
 					if(bFunc == 1){
 						/*Show infowindow on mouseove*/
+						var url = frontPageTruliamap.show(locations);
+						var infowindow = new google.maps.InfoWindow({
+    							content: "<div  class=\'truliamap_infowindow_div\'  ><iframe  frameBorder=0 class=\'truliamap_frame_infowindow\' src=\'"+url+"\'   ></iframe></div>"
+							});
+							
 						  google.maps.event.addListener(Googlemap.markers, \'click\', function(){
-							  frontPageTruliamap.show(locations);
+							  infowindow.open(Googlemap.map,this);
 						 });
 					}	
 				}
 			};
-			
 			
 			var frontPageTruliamap = {
 		
@@ -158,8 +149,8 @@ class frontPageTruliamap extends Controller_Front
 					
 					initialize: function(){ 
 						
-							var iMapWidth = $M("#map_canvas").parent().width();
-							var iMapHeight = $M("#map_canvas").parent().height();
+							var iMapWidth = $M(".map_canvas").parent().width();
+							var iMapHeight = $M(".map_canvas").parent().height();
 							
 							var iMinheigth = 200;
 							
@@ -167,8 +158,8 @@ class frontPageTruliamap extends Controller_Front
 								iMapHeight = iMinheigth;
 							}
 							
-							$M("#map_canvas").css("width",iMapWidth);
-							$M("#map_canvas").css("height",iMapHeight);
+							$M(".map_canvas").css("width",iMapWidth);
+							$M(".map_canvas").css("height",iMapHeight);
 							
 							frontPageTruliamap.create_map();			
 					
@@ -265,7 +256,7 @@ class frontPageTruliamap extends Controller_Front
 					},
 					
 					show: function(location){
-				
+					
 					var type = $M("."+frontPageTruliamap.APP_NAME+"_type").val();
 					
 					var loc = location.split(",");
@@ -278,7 +269,7 @@ class frontPageTruliamap extends Controller_Front
 					var size = $M("."+frontPageTruliamap.APP_NAME+"_size").val();
 					
 					if(type == "map"){
-						size = 450;
+						size = 180;
 					}
 					
 					
@@ -309,63 +300,82 @@ class frontPageTruliamap extends Controller_Front
 						
 						url += "&user_id="+show;
 					
-			
-				$M("."+frontPageTruliamap.APP_NAME+"_design_container").html("<iframe class=\'"+frontPageTruliamap.APP_NAME+"_frame\' src=\'"+url+"\'  ></iframe>");
-				
-				if(type == "map"){
-						$M(".truliamap_design_container").dialog({
-							width: 500,
-							modal: true
-						});
-						
-					}
+ 				if(type == "map"){
+ 				 return url;			
+ 				}
+ 				
+ 				var iMapWidth = $M("."+frontPageTruliamap.APP_NAME+"_design_container").parent().width();
+ 				var iMapHeight = $M("."+frontPageTruliamap.APP_NAME+"_design_container").parent().height();
+ 				
+ 				var iMinheigth = 200;
+							
+				if(iMapHeight == 0){
+					iMapHeight = iMinheigth;
+				}
+ 				
+ 				$M("."+frontPageTruliamap.APP_NAME+"_design_container").css("width",iMapWidth);
+ 				$M("."+frontPageTruliamap.APP_NAME+"_design_container").css("height",iMapHeight);
+ 				
+				$M("."+frontPageTruliamap.APP_NAME+"_design_container").html("<iframe  style=\'width:"+iMapWidth+"px;height:"+iMapHeight+"px;\' frameBorder=0 class=\'"+frontPageTruliamap.APP_NAME+"_frame\' src=\'"+url+"\'  ></iframe>");
 				
 				}
-				
-				
+			
 			};
-    
-   	var agree_flag = $M("."+frontPageTruliamap.APP_NAME+"_agree_flag").val();
-   	
-	if(agree_flag == 1){
-		
-		var type = $M("."+frontPageTruliamap.APP_NAME+"_type").val();
-		
-		switch(type){
-		case "map":
-			frontPageTruliamap.initialize();
-			break;
+   
+		   	var agree_flag = $M("."+frontPageTruliamap.APP_NAME+"_agree_flag").val();
+		   	
+			if(agree_flag == 1){
+				
+				var type = $M("."+frontPageTruliamap.APP_NAME+"_type").val();
+				
+				switch(type){
+				case "map":
+					frontPageTruliamap.initialize();
+					break;
+					
+				case "slide":
+					var aCity = frontPageTruliamap.get_locations();
+					frontPageTruliamap.show(aCity[0].loc);
+					break;
+					
+				case "calc":
+					var size = $M("."+frontPageTruliamap.APP_NAME+"_size").val();
+					
+					var url= "";
+					url += "http://www.trulia.com/tools/calculator/?mode=preview";
+					url += "&graph=&title=title_Mortgage_Calculator";
+					url += "&style=default"+size;
+					url += "&tpl_style=default"+size;
+					url += "&tpl_width="+size;
+					url += "&calculator_uri=mortgage/calculator/payment/&";
+					
+					var iMapWidth = $M("."+frontPageTruliamap.APP_NAME+"_design_container").parent().width();
+		 			var iMapHeight = $M("."+frontPageTruliamap.APP_NAME+"_design_container").parent().height();
+		 			
+		 			var iMinheigth = 200;
+									
+					if(iMapHeight == 0){
+						iMapHeight = iMinheigth;
+					}
+		 				
+		 			$M("."+frontPageTruliamap.APP_NAME+"_design_container").css("width",iMapWidth);
+		 			$M("."+frontPageTruliamap.APP_NAME+"_design_container").css("height",iMapHeight);
+									
+					$M("."+frontPageTruliamap.APP_NAME+"_design_container").html("<iframe style=\'width:"+iMapWidth+"px;height:"+iMapHeight+"px;\' frameBorder=0 class=\'"+frontPageTruliamap.APP_NAME+"_frame\' src=\'"+url+"\'  ></iframe>");
+									
+					break;
+				}
+
+			}else{
+				
+				$M("body").prepend(\'<div class="\'+frontPageTruliamap.APP_NAME+\'_err" />\');
+				var sErr_Mess = "You must agree in Trulia\'s terms & conditions to use the widgets.";
+				$M("."+frontPageTruliamap.APP_NAME+"_err").html(sErr_Mess);
 			
-		case "slide":
-			var aCity = frontPageTruliamap.get_locations();
-			frontPageTruliamap.show(aCity[0].loc);
-			break;
+			}
 			
-		case "calc":
-			var size = $M("."+frontPageTruliamap.APP_NAME+"_size").val();
-			var url= "";
-			url += "http://www.trulia.com/tools/calculator/?mode=preview";
-			url += "&graph=&title=title_Mortgage_Calculator";
-			url += "&style=default"+size;
-			url += "&tpl_style=default"+size;
-			url += "&tpl_width="+size;
-			url += "&calculator_uri=mortgage/calculator/payment/&";
-			$M("."+frontPageTruliamap.APP_NAME+"_design_container").html("<iframe class=\'"+frontPageTruliamap.APP_NAME+"_frame\' src=\'"+url+"\'  ></iframe>");
-			break;
-		}
-		
-	}else{
-		
-		$M("body").prepend(\'<div class="\'+frontPageTruliamap.APP_NAME+\'_err" />\');
-		var sErr_Mess = "You must agree in Trulia\'s terms & conditions to use the widgets.";
-		$M("."+frontPageTruliamap.APP_NAME+"_err").html(sErr_Mess);
-	
-	}
-    });
-    ';
-    
-    
-    
+		    });';
+
     	$this->writeJs($sJs);
     
     }

@@ -1,0 +1,21 @@
+@CHARSET "ISO-8859-1";
+
+.div_container {position:relative;display:inline-block}
+.rotate_div{position:absolute;width:250px;height:300px;border:1px solid black;margin:100px 100px 100px  100px;}
+		
+.truliamap_infowindow_div{width:230px;}
+.truliamap_frame_infowindow{width:220px;border:none;scrolling:none;height:350px;margin-left:5px;padding-left:5px;}	
+		
+.truliamap_frame{border:none;scrolling:none;padding:10px;}
+
+/*slideshow given style*/
+.tSlideShow{ position:relative; width:220px;} 
+.tSlideShow .tSlideShowFL a, .tSlideShow .tSlideShowFR a{color:#06C; text-decoration:none; font-family: Verdana, Arial, Helvetica, sans-serif; font-size:10px;} 
+.tSlideShow .tSlideShowFL a:hover, .tSlideShow .tSlideShowFR a:hover{color:#DF7E00 !important;text-decoration:underline !important;}
+
+/*calculator given style*/
+.tCalculator{ position:relative; width:450px;}
+.tCalculator .tCalculatorS1 { position:absolute; bottom:12px; left:2px; z-index:200;}
+.tCalculator .tCalculatorS1 a, .tCalculator .tCalculatorS2 a{ color:#448FDA; text-decoration:none; font-family: Verdana, Arial, Helvetica, sans-serif; font-size:10px;}
+
+.truliamap_err{color:red;font-style:italic;font-size:12px;}

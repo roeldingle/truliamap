@@ -2,7 +2,7 @@
 <lang>
     
         <var name="truliamap">Truliamap</var>
-
+	<var name="menu_contents">Settings</var>
     <var name="lang">subject</var>
     <var name="name">Subject</var>
 </lang>

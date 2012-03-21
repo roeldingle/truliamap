@@ -12,20 +12,13 @@ class adminPageSettings extends Controller_Admin
 
  	/*assign objects*/
     $this->oGet = new modelGet;
-    
    
-    
-    
 	$this->display($aArgs);
 	
-	
-
     }
 
     protected function display($aArgs){
     	
-    	
-
     	/*define page*/
     	$APP_NAME = "truliamap";
     	$this->assign("APP_NAME",$APP_NAME);
@@ -75,6 +68,9 @@ class adminPageSettings extends Controller_Admin
     	$this->assign("aStates",common()->getStates());
     	$this->assign("aSlideshow_opt",$aSlideshow_opt);
     	$this->assign("aPrice",$aPrice);
+    	
+    	/*for the additional links in the settins page*/
+    	$this->assign("bExtensionView", ($aArgs['etype'] ? 1 : 0));
     	
     	/*set the template*/
     	$this->view(__CLASS__);

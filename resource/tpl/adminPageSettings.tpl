@@ -147,8 +147,8 @@
 					<p><input type="radio" class="radio_btn" onclick="adminPageSettings.show_option();" <?php if($aSlideshow_opt['show']== "0"){ echo "checked";} ?>  name="<?php echo $APP_NAME;?>_show" id="<?php echo $APP_NAME;?>_show1" value="0" /><label for="<?php echo $APP_NAME;?>_show1">All Properties Listed in Trulia</label> <br /></p>
 					<p><input type="radio" class="radio_btn" onclick="adminPageSettings.show_option();" <?php if($aSlideshow_opt['show'] != "0"){ echo "checked";} ?> name="<?php echo $APP_NAME;?>_show" id="<?php echo $APP_NAME;?>_show2" value="1" /><label for="<?php echo $APP_NAME;?>_show2">Only My Properties in Trulia</label> <br /></p>
 					<p><label class="profile_id">Profile ID: </label><input value="<?php echo ($aSlideshow_opt['show']== "0")?"0":$aSlideshow_opt['show']; ?>" type="text" id="<?php echo $APP_NAME;?>_user_id" style="width:100px;" class="input_text" />
-					<span style="font-style:italic;font-size:11px;" >*Log-In to Trulia and find your Profile ID in your 'Profile' page.</span></p>
-					<p style="margin-left:20px;"><span style="font-style:italic;font-size:11px;" >Example: Profile Link: http://www.trulia.com/profile/id/4049455  (<u>4049455</u> is your Profile ID)</span></p>
+					<span style="font-style:italic;font-size:11px;" >* <a href="javascript:adminPageSettings.open_help();" ><i>what is my Profile ID?</i></a></span></p>
+					
 				</td>
 			</tr>
 			
@@ -230,13 +230,19 @@
 </form>
 
 <div>
-<input type="checkbox" id="<?php echo $APP_NAME;?>_agree" /> &nbsp; I agree to Trulia's <a target="_blank" href="http://www.trulia.com/terms" >Terms & Conditions</a> of use
+<input type="checkbox" id="<?php echo $APP_NAME;?>_agree" <?php if($aUserSetting['agree_flag'] == 1){echo "checked";}?> /> &nbsp; I agree to Trulia's <a target="_blank" href="http://www.trulia.com/terms" >Terms & Conditions</a> of use
 
 </div>
 
 <div class="tbl_lb_wide_btn">
 		<input type="button" value="Save" class="btn_apply" onclick="adminPageSettings.setting_submit()" />
 		<a href="#" class="add_link" title="Reset to default" onclick="devTools.reset_default()" >Reset to Default</a>
+		<?php 
+			 if ($bExtensionView === 1){
+			            echo '<a href="/admin/sub/?module=ExtensionPageManage&code=' . ucfirst(APP_ID) . '&etype=MODULE" class="add_link" title="Return to Manage ' . ucfirst(APP_ID) . '">Return to Manage ' . ucfirst(APP_ID) . '</a>
+			            <a href="/admin/sub/?module=ExtensionPageMyextensions" class="add_link" title="Return to My Extensions">Return to My Extensions</a>';
+			  }
+		?>
 </div>
 
 <!--form for reset-->
@@ -270,6 +276,37 @@
 			<div><a href="javascript:adminPageSettings.add_city();" class="btn_ly" title="Add City" >Add City</a></div>
 	</div>	
 </div>
+
+
+<!--popupbox help-->
+<div class="<?php echo $APP_NAME;?>_popupbox_help" id="<?php echo $APP_NAME;?>_popupbox_help" style="display:none;">
+	<div class="admin_popup_contents" >
+		<p>To find your Profile ID:</p>
+		<p>Log-In to Trulia and find your Profile ID in your 'Profile' page.</p>
+		<p>The last 7 digits of your Profile Link is your Profile ID.</p>
+		<p>Example: Profile Link: http://www.trulia.com/profile/id/4049455 </p>
+		<p>(4049455 is your Profile ID)</p><br />
+	
+	
+		<p>I have already changed my original Profile ID into different characters </p>
+		<p>Example: MikeLee, how do I get my original Profile ID? </p><br />
+		
+			<ol>
+				<li>1. Log in to your Trulia account</li>
+				<li>2. Point your mouse on your profile name and choose "Profile"</li>
+				<li>3. On your profile page click your "Profile Link"</li>
+				<li>4. then press CTRL+U (the source page will open).</li>
+				<li>5. On the source page, press CTRL+F and type " user_id", your oiginal Profile ID will then appear</li>
+				<li>Example:  user_id: 4049455</li>
+			</ol>
+		
+		<br />
+	</div>
+</div>
+
+
+
+
 
 </body>
 </html>

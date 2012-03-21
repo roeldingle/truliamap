@@ -345,6 +345,12 @@ var adminPageSettings = {
 				$(".err_div_loc").delay(1500).fadeOut(400).slideUp();
 			}
 			
+		},
+		
+		open_help: function(){
+			
+			devTools.open_popup(devTools.APP_NAME+"_popupbox_help",400,"Help");
+			
 		}
 	
 };
