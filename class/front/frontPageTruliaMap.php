@@ -22,6 +22,8 @@ class frontPageTruliaMap extends Controller_Front{
     	
     	$this->assign("APP_NAME",$APP_NAME);
     	
+    	$this->externalJS("http://maps.google.com/maps/api/js?sensor=false");
+    	
     	$this->importCSS(__CLASS__);
     	
     	/*set the user setting*/
@@ -132,6 +134,7 @@ class frontPageTruliaMap extends Controller_Front{
 					if(bFunc == 1){
 						/*Show infowindow on mouseove*/
 						var url = frontPageTruliamap.show(locations);
+						
 						var infowindow = new google.maps.InfoWindow({
     							content: "<div  class=\'truliamap_infowindow_div\'  ><iframe  frameBorder=0 class=\'truliamap_frame_infowindow\' src=\'"+url+"\'   ></iframe></div>"
 							});
