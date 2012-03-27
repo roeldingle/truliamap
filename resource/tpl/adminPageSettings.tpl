@@ -21,13 +21,6 @@
 		<col width="*" />
 	</colgroup>
 	
-	<!-- app id -->
-	<tr>
-		<th><label >App id </label></th>
-		<td >
-			<?php echo ucwords($APP_NAME);?>
-		</td>
-	</tr>
 	
 	<!-- type -->
 	<tr>
