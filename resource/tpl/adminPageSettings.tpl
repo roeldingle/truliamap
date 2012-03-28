@@ -87,9 +87,9 @@
 							<!-- loop the array containing the marker data -->
 							<?php  $counter = 0; foreach($aCity as $val){ ?>
 								<div class="add_location" id="<?php echo $APP_NAME;?>_marker_con_<?php echo $counter;?>" style="width:700px;height:30px;" >
-									<img src="/_sdk/img/truliamap/truliamap_icon_small.png" class="truliamap_icon_marker" />
+									<img src="[IMG]/truliamap_icon_small.png" class="truliamap_icon_marker" />
 									<input type="text"  value="<?php echo $val['loc'];?>(<?php echo $val['lat'];?>,<?php echo $val['lng'];?>)" readonly name="<?php echo $APP_NAME;?>_marker[]"  class="textbox" value="" style="float:left;width:350px;margin-top:3px" />
-									<a  href="javascript:adminPageSettings.remove_marker(<?php echo $counter;?>);"  ><img src="/_sdk/img/<?php echo $APP_NAME;?>/close_btn.png" class="close_btn" style="float:left;margin-top:4px;margin-left:5px;vertical-align:middle;display:inline-block" /></a>	
+									<a  href="javascript:adminPageSettings.remove_marker(<?php echo $counter;?>);"  ><img src="[IMG]/close_btn.png" class="close_btn" style="float:left;margin-top:4px;margin-left:5px;vertical-align:middle;display:inline-block" /></a>	
 								</div>
 							<?php $counter++; } ?>
 							</div>

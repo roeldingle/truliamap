@@ -120,7 +120,7 @@ class frontPageTruliaMap extends Controller_Front{
 				marker_init: function(locations,lat,lng, bFunc){
 					
 					/*image*/
-					var image_icon = "/_sdk/img/truliamap/truliamap_icon.png";
+					var image_icon = "[IMG]/truliamap_icon.png";
 				
 					Googlemap.markers = new google.maps.Marker({
 						  position: new google.maps.LatLng(lat,lng),
